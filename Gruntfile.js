@@ -54,7 +54,30 @@ module.exports = function (grunt) {
             'test/fixtures/folder/file4.js'
           ]
          }
-      }
+      },
+
+      single_sourcemap: {
+        options: {
+          reservedNames: ['upper'],
+          sourceMap: true
+        },
+        files: {
+          'tmp/single-out-sm.js': [
+            'test/fixtures/single.js'
+          ]
+         }
+      },
+      multiple_sourcemap: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'tmp/multiple-out-sm.js': [
+            'test/fixtures/file1.js',
+            'test/fixtures/file2.js'
+          ]
+         }
+      },
     },
 
     nodeunit: {
