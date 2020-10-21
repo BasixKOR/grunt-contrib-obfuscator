@@ -33,14 +33,11 @@ module.exports = function (grunt) {
     });
   };
 
-  function writeMap(filenames, map, mapFilename, totalCode) {
+  function writeMap(filenames, map, mapFilename) {
     if(!map) {
       return;
     } // source map is set to inline, or disabled.
     map.sources = filenames;
-    if(totalCode) {
-      map.sourcesContent = totalCode;
-    }
     grunt.file.write(mapFilename, JSON.stringify(map));
   }
 
@@ -69,13 +66,12 @@ module.exports = function (grunt) {
       var filenameDest = getFilename(file.dest);
 
       if (filenameDest) {
-        var totalCode;
         try {
-          totalCode = availableFiles.map(function (file) {
+          var totalCode = availableFiles.map(function (file) {
               return grunt.file.read(file);
-          });
+          }).join('');
 
-          obfuscated = obfuscate(totalCode.join(''), options);
+          obfuscated = obfuscate(totalCode, options);
 
         } catch (err) {
           grunt.log.error(err);
@@ -85,9 +81,7 @@ module.exports = function (grunt) {
         var output = banner + obfuscated.code;
 
         if(options.sourceMap) {
-          var mapFilename = options.sourceMapFilename || file.dest + '.map';
-          writeMap(file.src, obfuscated.map, mapFilename, totalCode);
-          created.files++;
+          grunt.log.error('Source Maps are not available with multiple files yet. Hint: you can use grunt-contrib-concat to combine files.');
         }
         grunt.file.write(file.dest, output);
 

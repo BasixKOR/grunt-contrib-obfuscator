@@ -67,17 +67,6 @@ module.exports = function (grunt) {
           ]
          }
       },
-      multiple_sourcemap: {
-        options: {
-          sourceMap: true
-        },
-        files: {
-          'tmp/multiple-out-sm.js': [
-            'test/fixtures/file1.js',
-            'test/fixtures/file2.js'
-          ]
-         }
-      },
     },
 
     nodeunit: {
