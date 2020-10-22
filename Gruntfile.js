@@ -67,6 +67,18 @@ module.exports = function (grunt) {
           ]
          }
       },
+      single_inline: {
+        options: {
+          reservedNames: ['upper'],
+          sourceMap: true,
+          sourceMapMode: 'inline'
+        },
+        files: {
+          'tmp/single-out-sm-inline.js': [
+            'test/fixtures/single.js'
+          ]
+         }
+      },
     },
 
     nodeunit: {
