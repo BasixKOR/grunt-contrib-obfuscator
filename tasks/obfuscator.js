@@ -86,6 +86,9 @@ module.exports = function (grunt) {
           } else {
             var mapFilename = options.sourceMapFilename || file.dest + '.map';
             writeMap(availableFiles, obfuscated.map, mapFilename);
+            if(options.sourceMapMode !== 'inline') {
+              output += '\n//# sourceMappingURL=' + options.sourceMapBaseUrl + '/' + mapFilename;
+            }
             created.files++;
           }
         }
