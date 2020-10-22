@@ -87,7 +87,7 @@ module.exports = function (grunt) {
             var mapFilename = options.sourceMapFilename || file.dest + '.map';
             if(options.sourceMapMode !== 'inline') {
               writeMap(availableFiles, obfuscated.map, mapFilename);
-              output += '\n//# sourceMappingURL=' + options.sourceMapBaseUrl + '/' + mapFilename;
+              output += '\n//# sourceMappingURL=' + (options.sourceMapBaseUrl || '') + '/' + mapFilename;
             }
             created.files++;
           }
