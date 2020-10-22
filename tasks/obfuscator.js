@@ -85,8 +85,8 @@ module.exports = function (grunt) {
             grunt.log.error('Source Maps are not available with multiple files yet. Hint: you can use grunt-contrib-concat to combine files.');
           } else {
             var mapFilename = options.sourceMapFilename || file.dest + '.map';
-            writeMap(availableFiles, obfuscated.map, mapFilename);
             if(options.sourceMapMode !== 'inline') {
+              writeMap(availableFiles, obfuscated.map, mapFilename);
               output += '\n//# sourceMappingURL=' + options.sourceMapBaseUrl + '/' + mapFilename;
             }
             created.files++;
