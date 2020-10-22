@@ -103,6 +103,9 @@ module.exports = function (grunt) {
           if(options.sourceMap) {
             var mapFilename = options.sourceMapFilename || file.dest + '.map';
             writeMap([fileSrc], obfuscated.map, options, mapFilename);
+            if(options.sourceMapMode !== 'inline') {
+              output += `\n//# sourceMappingURL=${mapFilename}`;
+            }
             created.files++;
           }
           grunt.file.write(file.dest + fileSrc, output);
