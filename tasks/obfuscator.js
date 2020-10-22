@@ -81,7 +81,13 @@ module.exports = function (grunt) {
         var output = banner + obfuscated.code;
 
         if(options.sourceMap) {
-          grunt.log.error('Source Maps are not available with multiple files yet. Hint: you can use grunt-contrib-concat to combine files.');
+          if(availableFiles.length > 1) {
+            grunt.log.error('Source Maps are not available with multiple files yet. Hint: you can use grunt-contrib-concat to combine files.');
+          } else {
+            var mapFilename = options.sourceMapFilename || file.dest + '.map';
+            writeMap(availableFiles, obfuscated.map, mapFilename);
+            created.files++;
+          }
         }
         grunt.file.write(file.dest, output);
 
@@ -101,12 +107,7 @@ module.exports = function (grunt) {
           var output = banner + obfuscated.code;
         
           if(options.sourceMap) {
-            var mapFilename = options.sourceMapFilename || file.dest + '.map';
-            writeMap([fileSrc], obfuscated.map, options, mapFilename);
-            if(options.sourceMapMode !== 'inline') {
-              output += `\n//# sourceMappingURL=${mapFilename}`;
-            }
-            created.files++;
+            grunt.log.error('Source Maps are not available with multiple files yet. Hint: you can use grunt-contrib-concat to combine files.');
           }
           grunt.file.write(file.dest + fileSrc, output);
 
